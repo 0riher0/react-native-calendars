@@ -12,7 +12,7 @@ export default function styleConstructor(theme: Theme = {}) {
       flex: 1
     },
     dayNum: {
-      fontSize: 28,
+     fontSize: 16.8,
       fontWeight: '200',
       fontFamily: appStyle.textDayFontFamily,
       color: appStyle.agendaDayNumColor
@@ -29,7 +29,7 @@ export default function styleConstructor(theme: Theme = {}) {
       width: 63,
       alignItems: 'center',
       justifyContent: 'flex-start',
-      marginTop: 32
+      marginTop: 0
     },
     today: {
       color: appStyle.agendaTodayColor
