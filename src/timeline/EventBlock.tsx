@@ -1,6 +1,6 @@
 import XDate from 'xdate';
 import React, {useCallback, useMemo} from 'react';
-import {View, Text, TextStyle, TouchableOpacity, ViewStyle} from 'react-native';
+import {View, Text, TextStyle, Pressable, ViewStyle} from 'react-native';
 
 export interface Event {
   id?: string;
@@ -53,7 +53,7 @@ const EventBlock = (props: EventBlockProps) => {
   }, [index, onPress]);
 
   return (
-    <TouchableOpacity activeOpacity={0.9} onPress={_onPress} style={[styles.event, eventStyle]}>
+    <Pressable onPress={_onPress} style={[styles.event, eventStyle]}>
       {renderEvent ? (
         renderEvent(event)
       ) : (
@@ -73,7 +73,7 @@ const EventBlock = (props: EventBlockProps) => {
           ) : null}
         </View>
       )}
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

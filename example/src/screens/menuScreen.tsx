@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Platform, StyleSheet, View, ScrollView, TouchableOpacity, Text, Image, I18nManager, Switch} from 'react-native';
+import {Platform, StyleSheet, View, ScrollView, Pressable, Text, Image, I18nManager, Switch} from 'react-native';
 import {Navigation} from 'react-native-navigation';
 import testIDs from '../testIDs';
 
@@ -14,21 +14,17 @@ interface Props {
 const MenuScreen = (props: Props) => {
   const {componentId} = props;
   const [forceRTL, setForceRTL] = useState(false);
-  
-  const toggleRTL = (value) => {
+
+  const toggleRTL = value => {
     I18nManager.forceRTL(value);
     setForceRTL(value);
   };
 
   const renderEntry = (testID: string, title: string, screen: string, options?: any) => {
     return (
-      <TouchableOpacity
-        testID={testID}
-        style={styles.menu}
-        onPress={() => openScreen(screen, options)}
-      >
+      <Pressable testID={testID} style={styles.menu} onPress={() => openScreen(screen, options)}>
         <Text style={styles.menuText}>{title}</Text>
-      </TouchableOpacity>
+      </Pressable>
     );
   };
 
@@ -60,11 +56,13 @@ const MenuScreen = (props: Props) => {
   return (
     <ScrollView>
       <View style={styles.container} testID={testIDs.menu.CONTAINER}>
-        <Image source={appIcon} style={styles.image}/>
+        <Image source={appIcon} style={styles.image} />
         {renderEntry(testIDs.menu.CALENDARS, 'Calendar', 'CalendarScreen')}
         {renderEntry(testIDs.menu.CALENDARS, 'Calendar Playground', 'CalendarPlaygroundScreen')}
         {renderEntry(testIDs.menu.CALENDAR_LIST, 'Calendar List', 'CalendarListScreen')}
-        {renderEntry(testIDs.menu.HORIZONTAL_LIST, 'Horizontal Calendar List', 'CalendarListScreen', {horizontalView: true})}
+        {renderEntry(testIDs.menu.HORIZONTAL_LIST, 'Horizontal Calendar List', 'CalendarListScreen', {
+          horizontalView: true
+        })}
         {renderEntry(testIDs.menu.HORIZONTAL_LIST, 'NEW Calendar List', 'NewCalendarListScreen')}
         {renderEntry(testIDs.menu.AGENDA, 'Agenda', 'AgendaScreen')}
         {renderEntry(testIDs.menu.EXPANDABLE_CALENDAR, 'Expandable Calendar', 'ExpandableCalendarScreen')}
@@ -73,7 +71,7 @@ const MenuScreen = (props: Props) => {
         {renderEntry(testIDs.menu.PLAYGROUND, 'Playground', 'Playground')}
         <View style={styles.switchContainer}>
           <Text>Force RTL</Text>
-          <Switch value={forceRTL} onValueChange={toggleRTL}/>
+          <Switch value={forceRTL} onValueChange={toggleRTL} />
         </View>
       </View>
     </ScrollView>

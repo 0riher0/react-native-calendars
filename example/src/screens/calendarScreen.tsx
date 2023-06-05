@@ -1,5 +1,5 @@
 import React, {useState, Fragment, useCallback, useMemo, useRef} from 'react';
-import {StyleSheet, View, ScrollView, Text, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, ScrollView, Text, Pressable} from 'react-native';
 import {Calendar, CalendarUtils} from 'react-native-calendars';
 import testIDs from '../testIDs';
 
@@ -15,7 +15,7 @@ const CalendarScreen = () => {
     return CalendarUtils.getCalendarDateString(newDate);
   };
 
-  const onDayPress = useCallback((day) => {
+  const onDayPress = useCallback(day => {
     setSelected(day.dateString);
   }, []);
 
@@ -54,7 +54,7 @@ const CalendarScreen = () => {
     return (
       <Fragment>
         <Text style={styles.text}>Calendar with week numbers</Text>
-        <Calendar style={styles.calendar} hideExtraDays showWeekNumbers/>
+        <Calendar style={styles.calendar} hideExtraDays showWeekNumbers />
       </Fragment>
     );
   };
@@ -217,7 +217,7 @@ const CalendarScreen = () => {
             textSectionTitleColor: '#319e8e',
             arrowColor: '#319e8e'
           }}
-          onDayPress={(day) => console.warn(`${day.dateString} pressed`)}
+          onDayPress={day => console.warn(`${day.dateString} pressed`)}
         />
       </Fragment>
     );
@@ -408,9 +408,11 @@ const CalendarScreen = () => {
     );
 
     const CustomHeaderTitle = (
-      <TouchableOpacity style={styles.customTitleContainer} onPress={() => console.warn('Tapped!')}>
-        <Text style={styles.customTitle}>{selectedValue.getMonth() + 1}-{selectedValue.getFullYear()}</Text>
-      </TouchableOpacity>
+      <Pressable style={styles.customTitleContainer} onPress={() => console.warn('Tapped!')}>
+        <Text style={styles.customTitle}>
+          {selectedValue.getMonth() + 1}-{selectedValue.getFullYear()}
+        </Text>
+      </Pressable>
     );
 
     return (
@@ -449,14 +451,14 @@ const CalendarScreen = () => {
       return (
         // @ts-expect-error
         <View ref={ref} {...props} style={styles.customHeader}>
-          <TouchableOpacity onPress={movePrevious}>
+          <Pressable onPress={movePrevious}>
             <Text>Previous</Text>
-          </TouchableOpacity>
+          </Pressable>
           <Text>Custom header!</Text>
           <Text>{currentMonth}</Text>
-          <TouchableOpacity onPress={moveNext}>
+          <Pressable onPress={moveNext}>
             <Text>Next</Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
       );
     });

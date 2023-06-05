@@ -1,8 +1,7 @@
 import isEmpty from 'lodash/isEmpty';
 import React, {useCallback} from 'react';
-import {StyleSheet, Alert, View, Text, TouchableOpacity, Button} from 'react-native';
+import {StyleSheet, Alert, View, Text, Button, Pressable} from 'react-native';
 import testIDs from '../testIDs';
-
 
 interface ItemProps {
   item: any;
@@ -28,21 +27,20 @@ const AgendaItem = (props: ItemProps) => {
   }
 
   return (
-    <TouchableOpacity onPress={itemPressed} style={styles.item} testID={testIDs.agenda.ITEM}>
+    <Pressable onPress={itemPressed} style={styles.item} testID={testIDs.agenda.ITEM}>
       <View>
         <Text style={styles.itemHourText}>{item.hour}</Text>
         <Text style={styles.itemDurationText}>{item.duration}</Text>
       </View>
       <Text style={styles.itemTitleText}>{item.title}</Text>
       <View style={styles.itemButtonContainer}>
-        <Button color={'grey'} title={'Info'} onPress={buttonPressed}/>
+        <Button color={'grey'} title={'Info'} onPress={buttonPressed} />
       </View>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 
 export default React.memo(AgendaItem);
-
 
 const styles = StyleSheet.create({
   item: {

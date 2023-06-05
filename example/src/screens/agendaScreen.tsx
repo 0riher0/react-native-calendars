@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Alert, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {Alert, StyleSheet, Text, View, Pressable} from 'react-native';
 import {Agenda, DateData, AgendaEntry, AgendaSchedule} from 'react-native-calendars';
 import testIDs from '../testIDs';
 
@@ -57,7 +57,7 @@ export default class AgendaScreen extends Component<State> {
 
         if (!items[strTime]) {
           items[strTime] = [];
-          
+
           const numItems = Math.floor(Math.random() * 3 + 1);
           for (let j = 0; j < numItems; j++) {
             items[strTime].push({
@@ -68,7 +68,7 @@ export default class AgendaScreen extends Component<State> {
           }
         }
       }
-      
+
       const newItems: AgendaSchedule = {};
       Object.keys(items).forEach(key => {
         newItems[key] = items[key];
@@ -77,22 +77,22 @@ export default class AgendaScreen extends Component<State> {
         items: newItems
       });
     }, 1000);
-  }
+  };
 
   renderItem = (reservation: AgendaEntry, isFirst: boolean) => {
     const fontSize = isFirst ? 16 : 14;
     const color = isFirst ? 'black' : '#43515c';
 
     return (
-      <TouchableOpacity
+      <Pressable
         testID={testIDs.agenda.ITEM}
         style={[styles.item, {height: reservation.height}]}
         onPress={() => Alert.alert(reservation.name)}
       >
         <Text style={{fontSize, color}}>{reservation.name}</Text>
-      </TouchableOpacity>
+      </Pressable>
     );
-  }
+  };
 
   renderEmptyDate = () => {
     return (
@@ -100,11 +100,11 @@ export default class AgendaScreen extends Component<State> {
         <Text>This is empty date!</Text>
       </View>
     );
-  }
+  };
 
   rowHasChanged = (r1: AgendaEntry, r2: AgendaEntry) => {
     return r1.name !== r2.name;
-  }
+  };
 
   timeToString(time: number) {
     const date = new Date(time);
